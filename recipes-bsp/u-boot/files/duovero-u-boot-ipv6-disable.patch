@@ -1,0 +1,14 @@
+diff --git git/include/configs/omap4_common.h.orig git/include/configs/omap4_common.h
+index bc60f3f..338c003 100644
+--- git/include/configs/omap4_common.h.orig
++++ git/include/configs/omap4_common.h
+@@ -155,7 +155,8 @@
+ 	"mmcargs=setenv bootargs console=${console} " \
+ 		"vram=${vram} " \
+ 		"root=${mmcroot} " \
+-		"rootfstype=${mmcrootfstype}\0" \
++		"rootfstype=${mmcrootfstype} " \
++		"ipv6.disable=1\0" \
+ 	"loadbootscript=fatload mmc ${mmcdev} ${loadaddr} boot.scr\0" \
+ 	"bootscript=echo Running bootscript from mmc${mmcdev} ...; " \
+ 		"source ${loadaddr}\0" \

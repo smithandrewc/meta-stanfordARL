@@ -1,0 +1,15 @@
+diff --git git/app/rtkrcv/gcc/makefile.orig git/app/rtkrcv/gcc/makefile
+index 4191fc9..29531f7 100644
+--- git/app/rtkrcv/gcc/makefile.orig
++++ git/app/rtkrcv/gcc/makefile
+@@ -4,8 +4,8 @@ BINDIR = /usr/local/bin
+ SRC    = ../../../src
+ 
+ # for beagleboard
+-#CTARGET= -mfpu=neon -mfloat-abi=softfp -ffast-math
+-CTARGET= -DENAGLO -DENAGAL -DENAQZS -DNFREQ=3
++CTARGET= -mfpu=neon -mfloat-abi=softfp -ffast-math
++#CTARGET= -DENAGLO -DENAGAL -DENAQZS -DNFREQ=3
+ 
+ CFLAGS = -Wall -O3 -ansi -pedantic -I$(SRC) -DTRACE $(CTARGET)
+ LDLIBS  = -lm -lrt -lpthread

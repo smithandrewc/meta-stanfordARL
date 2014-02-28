@@ -1,0 +1,43 @@
+diff --git git/arch/arm/mach-omap2/board-overo.c-orig git/arch/arm/mach-omap2/board-overo.c
+index 460ae96..caaa175 100644
+--- git/arch/arm/mach-omap2/board-overo.c-orig
++++ git/arch/arm/mach-omap2/board-overo.c
+@@ -217,6 +217,28 @@ static void __init overo_init_smsc911x(void)
+ static inline void __init overo_init_smsc911x(void) { return; }
+ #endif
+ 
++#define OVERO_GPIO_ROBOVERO_RESET 70
++
++static void __init robovero_reset_gpio_init(void)
++{
++	printk("... initing robovero_reset_gpio\n");
++	if ((gpio_request(OVERO_GPIO_ROBOVERO_RESET, "OVERO_GPIO_ROBOVERO_RESET") == 0) && (gpio_direction_output(OVERO_GPIO_ROBOVERO_RESET, 0) == 0))
++	{
++		if (0 == gpio_export(OVERO_GPIO_ROBOVERO_RESET, 0))
++		{
++			printk("exported robovero_reset_gpio 70");
++		}
++		else
++		{
++			printk("didn't export robovero_reset_gpio 70");
++		}
++	}
++	else
++	{
++		printk(KERN_ERR "could not obtain robovero_reset gpio for OVERO_GPIO_ROBOVERO_RESET\n");
++	}
++} 
++
+ #if defined(CONFIG_OMAP2_DSS) || defined(CONFIG_OMAP2_DSS_MODULE)
+ /* DSS */
+ static int lcd_enabled;
+@@ -752,6 +774,9 @@ static void __init overo_init(void)
+ 	else
+ 		printk(KERN_ERR "could not obtain gpio for "
+ 					"OVERO_GPIO_USBH_CPEN\n");
++
++	/* set the robovero reset gpio */
++        robovero_reset_gpio_init();
+ }
+ 
+ MACHINE_START(OVERO, "Gumstix Overo")

@@ -1,0 +1,42 @@
+#!/bin/sh
+#
+# Start the aerodroid-mavlink serial-udp proxy 
+#
+
+
+# Source networking configuration.
+. /etc/aerodroid-mavlink.conf
+
+start() {
+        echo "Starting aerodroid-mavlink..."
+
+        # run the program with default values 
+        /usr/bin/aerodroid-mavlink $TARGET_IP $MAVLINK_DEVICE $MAVLINK_BAUD &
+}
+stop() {
+        echo "Stopping aerodroid-mavlink..."
+
+	# kill the process
+	killall aerodroid-mavlink	
+}
+restart() {
+        stop
+        start
+}
+
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  restart)
+        restart
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|restart}"
+        exit 1
+esac
+
+exit $?
